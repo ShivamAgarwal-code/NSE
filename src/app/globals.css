@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+@import "tailwindcss";
+
+
+:root {
+  --background: #f8f9fb;
+  --foreground: #0a0e17;
+  --card-bg: #ffffff;
+  --card-bg-secondary: #f1f5f9;
+  --border-color: #e0e4e9;
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #64748b;
+  --accent: #38bdf8;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --gradient-start: #2563eb;
+  --gradient-end: #38bdf8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0e17;
+    --foreground: #f8f9fb;
+    --card-bg: #111827;
+    --card-bg-secondary: #1e293b;
+    --border-color: #1f2937;
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-dark: #2563eb;
+    --secondary: #94a3b8;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Manrope', sans-serif;
+}
+
+@layer components {
+  .card {
+    @apply bg-[var(--card-bg)] border border-[var(--border-color)] rounded-lg;
+  }
+  
+  .btn {
+    @apply px-4 py-2 text-sm font-medium transition-colors;
+  }
+  
+  .btn-primary {
+    @apply text-white bg-[var(--primary)] hover:bg-[var(--primary-dark)];
+  }
+  
+  .btn-secondary {
+    @apply text-[var(--foreground)] border border-[var(--border-color)] hover:bg-[var(--border-color)]/10;
+  }
+  
+  .trading-grid {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-4;
+  }
+  
+  .bracket-btn {
+    @apply inline-flex items-center gap-1 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors;
+  }
+  
+  .bracket-btn:before {
+    content: "[";
+  }
+  
+  .bracket-btn:after {
+    content: "]";
+  }
+
+  .toggle {
+    @apply relative inline-block w-10 h-5;
+  }
+  
+  .toggle input {
+    @apply opacity-0 w-0 h-0;
+  }
+  
+  .toggle-slider {
+    @apply absolute cursor-pointer top-0 left-0 right-0 bottom-0 bg-[var(--border-color)] rounded-full transition-colors;
+  }
+  
+  .toggle-slider:before {
+    @apply absolute content-[''] h-4 w-4 left-0.5 bottom-0.5 bg-white rounded-full transition-transform;
+  }
+  
+  input:checked + .toggle-slider {
+    @apply bg-[var(--primary)];
+  }
+  
+  input:checked + .toggle-slider:before {
+    @apply transform translate-x-5;
+  }
+  
+  .progress-bar {
+    @apply h-1.5 bg-[var(--border-color)] rounded-full overflow-hidden;
+  }
+  
+  .progress-bar-fill {
+    @apply h-full bg-[var(--primary)];
+  }
+}
+
+/* Carousel custom styles */
+.works-slider .slick-slide {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.5s ease;
+}
+
+.works-slider .slick-center,
+.works-slider .slick-current,
+.works-slider .slick-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.works-slider .slick-slide:hover {
+  opacity: 1;
+}
+
+.carousel-item {
+  transition: all 0.5s ease;
+  height: 100%;
+}
+
+/* Add smooth sliding effect to the carousel */
+.works-slider {
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.works-slider .slick-list {
+  overflow: hidden;
+  margin: 0 -0.5rem;
+}
+
+.works-slider .slick-track {
+  display: flex !important;
+  align-items: stretch;
+}
+
+.slick-slide {
+  height: auto !important;
+}
+
+.slick-slide > div {
+  height: 100%;
+  margin: 0 0.5rem;
+}
+
+/* Card background grid */
+.card.with-grid-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+}
